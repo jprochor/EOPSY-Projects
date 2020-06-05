@@ -15,6 +15,7 @@ int main (int argc, char **argv)
   int map=0;  //variable to indicate if read/write or mmap should be used
   int a;
   int test;
+  int ifhelp=0;
   char data[128]; //buffer 
   int dscin;  //input file descriptor
   int dscout; //output file descriptor
@@ -29,6 +30,7 @@ int main (int argc, char **argv)
       {
       case 'h': //help
 	fprintf(stdout,"\nSyntax: copy [-m] <file_name> <new_file_name>\ncopy [-h]\nOptionless uses read() and write(), -m option indicates usage of mmap, -h option displays help\n");
+	ifhelp=1;
         break;
       case 'm': //indicates usage of mmap
 	map=1;
@@ -45,6 +47,12 @@ int main (int argc, char **argv)
       }
 
 
+	
+	if(ifhelp==1) //help option was called so can end here
+	{
+		return 1;
+	}
+		
 
 test=optind;
 
